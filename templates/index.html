@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Weather Forcast Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}">
+</head>
+<body>
+<div class="container">
+    <h1>Weather Forcast For The Next Days</h1>
+    <form method="post">
+        <label for="place">Place:</label>
+        <input type="text" id="place" name="place" required value="{{ place or '' }}">
+        <label for="days">Forcast Days:</label>
+        <input type="range" id="days" name="days" min="1" max="5" value="{{ days or 1}}"
+        oninput="this.nextElementSibling.value = this.value">
+        <output>{{ days or 1}}</output>
+        <p class="help-text">Select the number of forecasted days</p>
+        <label for="option">Select data to view:</label>
+        <select id="option" name="option">
+            <option value="Temperature" {% if option == 'Temperature' %}selected{% endif %}>Temperature</option>
+            <option value="Sky" {% if option == 'Sky' %}selected{% endif %}>Sky</option>
+        </select>
+
+        <button type="submit">Submit</button>
+    </form>
+     {% if place and days and option %}
+    <h2>{{ option }} for the next {{ days }} days in {{ place }}</h2>
+    {% if chart_html %}
+        <div class="chart-container">
+            {{ chart_html | safe }}
+        </div>
+    {% endif %}
+{% endif %}
+
+</div>
+
+</body>
+</html>
