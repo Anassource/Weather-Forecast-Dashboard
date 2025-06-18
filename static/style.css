@@ -1,27 +1,29 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f2f2f2;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background-color: #eef2f5;
     margin: 0;
-    padding: 20px;
+    padding: 30px;
 }
 
 .container {
-    background: white;
-    max-width: 600px;
+    max-width: 750px;
     margin: auto;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    padding: 30px 40px;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
 }
 
-.chart-container {
-    margin-top: 30px;
+h1 {
+    text-align: center;
+    color: #222;
+    margin-bottom: 25px;
 }
 
-
-h1, h2 {
+h2 {
     text-align: center;
     color: #333;
+    margin-top: 35px;
 }
 
 form {
@@ -32,34 +34,91 @@ form {
 
 label {
     font-weight: bold;
+    color: #444;
 }
 
 input[type="text"], select {
-    padding: 8px;
+    padding: 10px;
     font-size: 16px;
-    border-radius: 5px;
+    border-radius: 6px;
     border: 1px solid #ccc;
+    background-color: #fdfdfd;
 }
 
 input[type="range"] {
     width: 100%;
 }
 
+output {
+    margin-left: 10px;
+    font-weight: bold;
+    color: #007bff;
+}
+
+.help-text {
+    font-size: 12px;
+    color: #666;
+}
+
 button {
     background-color: #007bff;
     color: white;
-    padding: 10px;
+    padding: 12px;
     font-size: 16px;
     border: none;
-    border-radius: 5px;
+    border-radius: 6px;
     cursor: pointer;
+    transition: background 0.3s ease;
 }
 
 button:hover {
     background-color: #0056b3;
 }
 
-.help-text {
-    font-size: 12px;
-    color: #666;
+.chart-container {
+    margin-top: 30px;
+}
+
+/* --- Sky image layout --- */
+.sky-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.sky-item {
+    background: #f0f8ff;
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+    width: 140px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease;
+}
+
+.sky-item:hover {
+    transform: translateY(-5px);
+}
+
+.sky-item img {
+    max-width: 100px;
+    height: auto;
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding: 20px;
+    }
+
+    .sky-item {
+        width: 100px;
+        padding: 10px;
+    }
+
+    button {
+        font-size: 14px;
+        padding: 10px;
+    }
 }

@@ -2,20 +2,22 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Weather Forcast Dashboard</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}">
+    <title>Weather Forecast Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 <div class="container">
-    <h1>Weather Forcast For The Next Days</h1>
-    <form method="post">
+    <h1>Weather Forecast Dashboard</h1>
+
+    <form method="POST">
         <label for="place">Place:</label>
-        <input type="text" id="place" name="place" required value="{{ place or '' }}">
-        <label for="days">Forcast Days:</label>
-        <input type="range" id="days" name="days" min="1" max="5" value="{{ days or 1}}"
-        oninput="this.nextElementSibling.value = this.value">
-        <output>{{ days or 1}}</output>
+        <input type="text" id="place" name="place" placeholder="Enter city name" required value="{{ place or '' }}">
+
+        <label for="days">Forecast Days:</label>
+        <input type="range" id="days" name="days" min="1" max="5" value="{{ days or 1 }}" oninput="this.nextElementSibling.value = this.value">
+        <output>{{ days or 1 }}</output>
         <p class="help-text">Select the number of forecasted days</p>
+
         <label for="option">Select data to view:</label>
         <select id="option" name="option">
             <option value="Temperature" {% if option == 'Temperature' %}selected{% endif %}>Temperature</option>
@@ -24,16 +26,30 @@
 
         <button type="submit">Submit</button>
     </form>
-     {% if place and days and option %}
-    <h2>{{ option }} for the next {{ days }} days in {{ place }}</h2>
-    {% if chart_html %}
-        <div class="chart-container">
-            {{ chart_html | safe }}
+
+    {% if place and days and option %}
+        <div class="result-section">
+            <h2>{{ option }} forecast for {{ place }} ({{ days }} day{{ 's' if days|int > 1 else '' }})</h2>
+
+            {% if chart_html %}
+                <div class="chart-container">
+                    {{ chart_html | safe }}
+                </div>
+            {% elif sky_images %}
+                <div class="sky-container">
+                    {% for item in sky_images %}
+                        <div class="sky-item">
+                            <p><strong>{{ item.datetime }}</strong></p>
+                            <img src="{{ item.img_path }}" alt="{{ item.condition }}" width="100">
+                            <p>{{ item.condition }}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p>No data available. Please check the city name.</p>
+            {% endif %}
         </div>
     {% endif %}
-{% endif %}
-
 </div>
-
 </body>
 </html>
